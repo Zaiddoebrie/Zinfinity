@@ -31,53 +31,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player;
-let cursors;
-let score = 0;
-let scoreText;
 
 function preload() {
     this.load.image('ground', 'path/to/ground.png');
-    this.load.spritesheet('dino', 'path/to/dino.png', { frameWidth: 44, frameHeight: 47 });
-    this.load.spritesheet('otherCharacter', 'path/to/other_character.png', { frameWidth: 44, frameHeight: 47 });
-}
-
-function create() {
-    this.add.image(400, 300, 'ground').setOrigin(0, 0);
-
-    player = this.physics.add.sprite(100, 300, 'dino').setScale(2);
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-
-    this.physics.add.collider(player, platforms);
-
-    cursors = this.input.keyboard.createCursorKeys();
-
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
-
-    // Add other characters
-    otherCharacter = this.physics.add.sprite(500, 300, 'otherCharacter').setScale(2);
-    otherCharacter.setBounce(0.2);
-    otherCharacter.setCollideWorldBounds(true);
-
-    this.physics.add.collider(otherCharacter, platforms);
-}
-
-function update() {
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.setVelocityY(-330);
-    }
-
-    // Add more game logic, collision detection, scoring, etc.
-
-    // Example: Increase the score when the player overlaps with the other character
-    this.physics.overlap(player, otherCharacter, collectOtherCharacter, null, this);
-}
-
-function collectOtherCharacter(player, otherCharacter) {
-    otherCharacter.disableBody(true, true);
-
-    // Update the score
-    score += 10;
-    scoreText.setText('Score: ' + score);
-}
-
+    this.load.spritesheet('dino', 'path/to/dino.png', { frameWidth: 44, frameHeight
