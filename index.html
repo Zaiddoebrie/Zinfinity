@@ -1,37 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Jumping Game</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-</head>
-<body>
-    <script src="game.js"></script>
-</body>
-</html>
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 400,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+import openai
 
-const game = new Phaser.Game(config);
+# Set your OpenAI GPT-3 API key
+openai.api_key = 'YOUR_API_KEY'
 
-let player;
+# Function to generate a response from GPT-3
+def generate_response(prompt):
+    response = openai.Completion.create(
+        engine="davinci-codex",  # You can try other engines like "text-davinci-003" or "davinci",
+        prompt=prompt,
+        max_tokens=150,
+        n=1,
+        stop=None,
+        temperature=0.7
+    )
+    return response.choices[0].text.strip()
 
-function preload() {
-    this.load.image('ground', 'path/to/ground.png');
-    this.load.spritesheet('dino', 'path/to/dino.png', { frameWidth: 44, frameHeight
+# Example usage
+user_input = "Generate code to print 'Hello, World!' in Python."
+response = generate_response(user_input)
+print(response)
